@@ -12,17 +12,18 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     mars = mongo.db.mars.find_one()
+    # print("Mars: " + mars)
     return render_template("index.html", mars=mars)
     
-# Setup Scraping Route\n",
-# The button of the web app.\n",
+# Setup Scraping Route",
+# The button of the web app.",
 @app.route("/scrape")
 def scrape():
     mars = mongo.db.mars
-    mars_data = scraping.scrape_all()
+    mars_data = scraping.scrape_all() 
     mars.update_one({}, {"$set":mars_data}, upsert=True)
     return redirect('/', code=302)
     
 # tell Flask to run
-    if __name__ == "__main__":
-        app.run()
+if __name__ == "__main__":
+    app.run()
