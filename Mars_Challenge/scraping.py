@@ -20,6 +20,7 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
+        "hemispheres": hemispheres(browser),
         "last_modified": dt.datetime.now()
     }
     # print(data)
@@ -54,7 +55,6 @@ def mars_news(browser):
         return None, None
 
     return news_title, news_p
-
 
 def featured_image(browser):
     # Visit URL
@@ -116,10 +116,11 @@ def hemispheres(browser):
         title = browser.find_by_css("h2.title").text
         hemispheres["img_url"] = img_url
         hemispheres["title"] = title
-        hemisphere_data = scrape_hemisphere(browser.html)
+        hemisphere_data = scrape_hemisphere(browser.html) 
         hemisphere_image_urls.append(hemisphere_data)
         browser.back()
     return hemisphere_image_urls
+
 
 # return the scraped data as a list of dictionaries with 
 # the URL string and title of each hemisphere image.
